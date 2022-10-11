@@ -11,32 +11,32 @@ const Manager = require('./lib/manager');
 async function employeeData() {
     return inquirer
         .prompt([
-            {
-              type: 'list',
-              message: 'What type of employee?',
-              name: 'employeetype',
-              choices: [
-                'manager',
-                'engineer',
-                'intern',
-                ]
-            },
-            {
-                type: 'input',
-                message: 'What is the employee name?',
-                name: 'name',
-            },
-            {
-                type: 'input',
-                message: 'What is the employee id?',
-                name: 'employeeid',
-            },
-            {
-                type: 'input',
-                message: 'What is the email address?',
-                name: 'email',
-            }            
-        ])
+        {
+            type: 'list',
+            message: 'What type of employee?',
+            name: 'employeetype',
+            choices: [
+            'manager',
+            'engineer',
+            'intern',
+            ]
+        },
+        {
+            type: 'input',
+            message: 'What is the employee name?',
+            name: 'name',
+        },
+        {
+            type: 'input',
+            message: 'What is the employee id?',
+            name: 'employeeid',
+        },
+        {
+            type: 'input',
+            message: 'What is the email address?',
+            name: 'email',
+        }            
+    ])
 }
 
 function managerData() {
@@ -44,7 +44,7 @@ function managerData() {
         .prompt([
         {   type: 'input',
             message: 'What is the office number?',
-            name: 'officenum'
+            name: 'officenum',
         }
     ])         
 }
@@ -54,7 +54,7 @@ function engineerData() {
         .prompt([
         {   type: 'input',
             message: 'What is your GitHub?',
-            name: 'github'
+            name: 'github',
         }
     ])         
 }
@@ -64,25 +64,44 @@ function internData() {
         .prompt([
         {   type: 'input',
             message: 'What is your school?',
-            name: 'school'
+            name: 'school',
+        }
+    ]) 
+}
+
+async function askAgain() {
+    return inquirer
+        .prompt([
+        {   type: 'confirm',
+            message: 'Do you want to add another employee?',
+            name: 'addanother',
         }
     ]) 
 }
 
 // Can use switch here instead of else/if
 async function init() {
-    let data = await employeeData();
+    
+    let addEmployee = true
+    
+    while(addEmployee) {
+        let data = await employeeData();
 
-    if(data.employeetype === "manager") {
-        managerData();
-    } else if(data.employeetype === "engineer") {        
-        engineerData();
-    } else {
-        internData();
+        if(data.employeetype === "manager") {
+            await managerData();
+        } else if(data.employeetype === "engineer") {        
+            await engineerData();
+        } else {
+            await internData();
+        }
+        
+        let result = await askAgain();
+
+        if(!result.confirm) {
+            addEmployee = false
+        }
     }
 }
 
 init();
-
-
 
