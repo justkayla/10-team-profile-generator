@@ -14,7 +14,7 @@ async function init() {
     let addEmployee = true
     // How do I access the data from outside the while loop?
     let arrData = [];
-    
+        
     while(addEmployee) {
         let data = await employeeData();
         console.log(data)        
@@ -24,7 +24,7 @@ async function init() {
             // data is an object of employeeData, the result of managerData is a property
             data = {...data, ...manager}    // Spread syntax
             console.log(data)
-            arrData.push(data) 
+            arrData.push(data)
 
         } else if(data.employeetype === "Engineer") {        
             let engineer = await engineerData();   // Wait for response before engaging askAgain()
@@ -42,7 +42,8 @@ async function init() {
         if(!result.addanother) {
             addEmployee = false
         }
-    }  
+    }    
+    console.log(arrData); 
     // How is the location of where this function is called affecting it's functionality? Does the argument that is passed through here need to be the same as in htmldata? Should I write the whole function on this page instead?
     writeToFile(arrData);
 }
