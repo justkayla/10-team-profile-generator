@@ -22,21 +22,21 @@ async function init() {
         if(data.employeetype === "Manager") {
             let manager = await managerData();    // Wait for response before engaging askAgain()
             // data is an object of employeeData, the result of managerData is a property
-            data = {...data, ...manager} // Spread syntax
-            console.log(data)
-            arrData.push(data)      
-
-        } else if(data.employeetype === "Engineer") {        
-            let engineer = await engineerData();   // Wait for response before engaging askAgain()
-            data = {...data, ...engineer} // Spread syntax
+            data = {...data, ...manager}    // Spread syntax
             console.log(data)
             arrData.push(data) 
 
+        } else if(data.employeetype === "Engineer") {        
+            let engineer = await engineerData();   // Wait for response before engaging askAgain()
+            data = {...data, ...engineer}   // Spread syntax
+            console.log(data)
+            arrData.push(data)
+
         } else {
             let intern = await internData();     // Wait for response before engaging askAgain()
-            data = {...data, ...intern} // Spread syntax
+            data = {...data, ...intern}     // Spread syntax
             console.log(data)
-            arrData.push(data)          
+            arrData.push(data)     
         }        
         let result = await askAgain();
         if(!result.addanother) {
@@ -48,4 +48,3 @@ async function init() {
 }
 
 init();
-
