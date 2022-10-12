@@ -36,9 +36,10 @@ async function init() {
             addEmployee = false
         }
     }
+    
 
     // Empty array to push stuff into to pull from for writeToFile
-    writeToFile
+    writeToFile();
 }
 
 init();
