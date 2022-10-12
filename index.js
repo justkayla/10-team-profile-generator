@@ -7,7 +7,8 @@ const Manager = require('./lib/manager');
 // const generateHTML = require('./lib/htmldata');
 
 
-// Promise?
+// Collaborated on section w/ Tarek M, Tyler O, Alex O, and Hunter A
+// async functions to controll questions based on employee type
 async function employeeData() {
     return inquirer
         .prompt([
@@ -39,6 +40,7 @@ async function employeeData() {
     ])
 }
 
+// If manager was selected, ask this additional question
 function managerData() {
     return inquirer
         .prompt([
@@ -49,6 +51,7 @@ function managerData() {
     ])         
 }
 
+// If engineer was selected, ask this additional question
 function engineerData() {
     return inquirer
         .prompt([
@@ -59,6 +62,7 @@ function engineerData() {
     ])         
 }
 
+// If intern was selected, ask this additional question
 function internData() {
     return inquirer
         .prompt([
@@ -69,6 +73,7 @@ function internData() {
     ]) 
 }
 
+// Ask to add another employee (confirm Y/n = true/false)
 async function askAgain() {
     return inquirer
         .prompt([
@@ -88,11 +93,11 @@ async function init() {
         let data = await employeeData();
 
         if(data.employeetype === "manager") {
-            await managerData();
+            await managerData();    // Wait for response before engaging askAgain()
         } else if(data.employeetype === "engineer") {        
-            await engineerData();
+            await engineerData();   // Wait for response before engaging askAgain()
         } else {
-            await internData();
+            await internData();     // Wait for response before engaging askAgain()
         }
         
         let result = await askAgain();
