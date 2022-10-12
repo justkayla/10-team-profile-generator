@@ -12,34 +12,39 @@ const {generateHTML, employeeData, managerData, engineerData, internData, askAga
 async function init() {
     
     let addEmployee = true
+    // How do I access the data from outside the while loop?
+    let arrData = [];
     
     while(addEmployee) {
         let data = await employeeData();
-        console.log(data)
+        console.log(data)        
 
-        if(data.employeetype === "manager") {
-            await managerData();    // Wait for response before engaging askAgain()
-            data = {...data, ...x} // spread syntax
-            console.log(data) // Data is an object, managerData is an object data = {...data, ...x} spread syntax
-            // push data to array
-        } else if(data.employeetype === "engineer") {        
-            await engineerData();   // Wait for response before engaging askAgain()
-            // push data to array
+        if(data.employeetype === "Manager") {
+            let manager = await managerData();    // Wait for response before engaging askAgain()
+            // data is an object of employeeData, the result of managerData is a property
+            data = {...data, ...manager} // Spread syntax
+            console.log(data)
+            arrData.push(data)      
+
+        } else if(data.employeetype === "Engineer") {        
+            let engineer = await engineerData();   // Wait for response before engaging askAgain()
+            data = {...data, ...engineer} // Spread syntax
+            console.log(data)
+            arrData.push(data) 
+
         } else {
-            await internData();     // Wait for response before engaging askAgain()
-            // push data to array
-        }
-        
+            let intern = await internData();     // Wait for response before engaging askAgain()
+            data = {...data, ...intern} // Spread syntax
+            console.log(data)
+            arrData.push(data)          
+        }        
         let result = await askAgain();
-
         if(!result.addanother) {
             addEmployee = false
         }
-    }
-    
-
-    // Empty array to push stuff into to pull from for writeToFile
-    writeToFile();
+    }  
+    // How is the location of where this function is called affecting it's functionality? Does the argument that is passed through here need to be the same as in htmldata? Should I write the whole function on this page instead?
+    writeToFile(arrData);
 }
 
 init();
