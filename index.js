@@ -20,21 +20,21 @@ const generateHTML = (employees) => {
         } else {
             special = "School: "+employees[i].getSchool()
         }
-        employeeHTML += `<div class="card employee-card col-2">
-        <div class="row">            
-            <div class="header">
-                <h2 class="card-title">📎 ${employees[i].getRole()}</h2>
+        employeeHTML += `<div class="card employee-card col-2 m-3">
+            <div class="row">            
+                <div class="header">
+                    <h2 class="card-title">📎 ${employees[i].getRole()}</h2>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">Name: ${employees[i].getName()}</li>
+                        <li class="list-group-item">Employee ID: ${employees[i].getId()}</li>
+                        <li class="list-group-item">Email: ${employees[i].getEmail()}</li>                    
+                        <li class="list-group-item">${special}</li>                    
+                    </ul>
+                </div>            
             </div>
-            <div class="card-body">
-                <ul class="list-group">
-                    <li class="list-group-item">Name: ${employees[i].getName()}</li>
-                    <li class="list-group-item">Employee ID: ${employees[i].getId()}</li>
-                    <li class="list-group-item">Email: ${employees[i].getEmail()}</li>                    
-                    <li class="list-group-item">${special}</li>                    
-                </ul>
-            </div>            
-        </div>
-    </div>`
+        </div>`
     }
     return `<!DOCTYPE html>
 <html lang="en">
@@ -54,7 +54,10 @@ const generateHTML = (employees) => {
           <p class="lead">Welcome! We're happy you're here 🙌</p>
         </div>
       </div>
-      ${employeeHTML}   
+      <div class="d-flex justify-content-center p-3 m-3">
+      ${employeeHTML}
+      </div>
+      
 
 <div class="container-fluid" id="footer">
         <div class="row align-items-end">
