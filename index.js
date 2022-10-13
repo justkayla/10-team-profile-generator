@@ -4,10 +4,10 @@ const Employee = require('./lib/employee');
 const Engineer = require('./lib/engineer');
 const Intern = require('./lib/intern');
 const Manager = require('./lib/manager');
-const {generateHTML, employeeData, managerData, engineerData, internData, askAgain, writeToFile} = require('./lib/htmldata');
+const {generateHTML, employeeData, managerData, engineerData, internData, askAgain, init, writeToFile} = require('./lib/htmldata');
 
 
-
+/*
 // Can use switch here instead of else/if
 async function init() {
     
@@ -47,5 +47,5 @@ async function init() {
     // How is the location of where this function is called affecting it's functionality? Does the argument that is passed through here need to be the same as in htmldata? Should I write the whole function on this page instead?
     writeToFile(arrData);
 }
-
+*/
 init();
