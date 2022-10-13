@@ -17,16 +17,19 @@
         </div>
       </div>
     
-    <div class="card employee-card">
+      <div class="card employee-card col-4">
+        <div class="row">        
         <div class="header">
-            <h2 class="card-title">Manager</h2>            
+            <h2 class="card-title">${employees[i].getRole()}</h2>
         </div>
         <div class="card-body">
             <ul class="list-group">
-                <li class="list-group-item">Name: Kayla</li>
-                <li class="list-group-item">Id: 1</li>
-                <li class="list-group-item">Email: kaylarjustice@gmail.com</li>
+                <li class="list-group-item">${employees[i].getName()}</li>
+                <li class="list-group-item">${employees[i].getId()}</li>
+                <li class="list-group-item">${employees[i].getEmail()}</li>                    
+                <li class="list-group-item">${special}</li>                    
             </ul>
+        </div>        
         </div>
     </div>
     

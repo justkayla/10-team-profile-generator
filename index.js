@@ -6,32 +6,35 @@ const Manager = require('./lib/manager');
 
 let arrData = [];
 
-// This needs to be broken down into different parts to loop over array
+// Function to dynamically generate HTML
 const generateHTML = (employees) => {
     console.log(employees);
     let employeeHTML = ""
+    // Cannot accomodate multiple operation lines in template literals, needs to be separated
     for (let i = 0; i < arrData.length; i++) {
         let special = ""
         if(employees[i].getRole() === "Manager") {
-            special = employees[i].getOfficeNum()
+            special = "Office Number: "+employees[i].getOfficeNum()
         } else if (employees[i].getRole() === "Engineer"){
-            special = employees[i].getGithub()       
+            special = "GitHub: "+employees[i].getGithub()       
         } else {
-            special = employees[i].getSchool()
+            special = "School: "+employees[i].getSchool()
         }
-        employeeHTML += `<div class="card employee-card">
+        employeeHTML += `<div class="card employee-card col-2">
+        <div class="row">            
             <div class="header">
-                <h2 class="card-title">${employees[i].getRole()}</h2>
+                <h2 class="card-title">📎 ${employees[i].getRole()}</h2>
             </div>
             <div class="card-body">
                 <ul class="list-group">
-                    <li class="list-group-item">${employees[i].getName()}</li>
-                    <li class="list-group-item">${employees[i].getId()}</li>
-                    <li class="list-group-item">${employees[i].getEmail()}</li>                    
+                    <li class="list-group-item">Name: ${employees[i].getName()}</li>
+                    <li class="list-group-item">Employee ID: ${employees[i].getId()}</li>
+                    <li class="list-group-item">Email: ${employees[i].getEmail()}</li>                    
                     <li class="list-group-item">${special}</li>                    
                 </ul>
-            </div>
-        </div>`
+            </div>            
+        </div>
+    </div>`
     }
     return `<!DOCTYPE html>
 <html lang="en">
@@ -63,7 +66,6 @@ const generateHTML = (employees) => {
 </body>
 </html>`;
 }
-
 // Collaborated on section w/ Tarek, Tyler O, Alex, and Hunter
 // async functions to controll questions based on employee type
 async function employeeData() {
@@ -143,32 +145,31 @@ async function askAgain() {
 // Can use switch here instead of else/if
 async function init() {
 
-    let addEmployee = true
-    // How do I access the data from outside the while loop?
-    // let arrData = [];    
+    // Force addEmployee to be true during while loop
+    let addEmployee = true       
 
+    // while loop to cycle through additional questions (await answer before engaging askAgain())
     while (addEmployee) {
         let data = await employeeData();
         console.log(data)
 
         if (data.employeetype === "Manager") {
-            let manager = await managerData();    // Wait for response before engaging askAgain()
-            // data is an object of employeeData, the result of managerData is a property
+            let manager = await managerData();    // Wait for response before engaging askAgain()            
             data = { ...data, ...manager }    // Spread syntax
             console.log(data)
             let newManager = new Manager(data.name, data.id, data.email, data.officenum)
             arrData.push(newManager)
 
         }else if (data.employeetype === "Engineer") {
-            let engineer = await engineerData();   // Wait for response before engaging askAgain()
-            data = { ...data, ...engineer }   // Spread syntax
+            let engineer = await engineerData();
+            data = { ...data, ...engineer }   
             console.log(data)
             let newEngineer = new Engineer(data.name, data.id, data.email, data.github)
             arrData.push(newEngineer)
 
         }else {
-            let intern = await internData();     // Wait for response before engaging askAgain()
-            data = { ...data, ...intern }     // Spread syntax
+            let intern = await internData();
+            data = { ...data, ...intern }
             console.log(data)
             let newIntern = new Intern(data.name, data.id, data.email, data.school)
             arrData.push(newIntern)
@@ -177,9 +178,7 @@ async function init() {
         if (!result.addanother) {
             addEmployee = false
         }
-    }
-    console.log(arrData);
-    // How is the location of where this function is called affecting it's functionality? Does the argument that is passed through here need to be the same as in htmldata? Should I write the whole function on this page instead?
+    }    
     writeToFile(arrData);
 }
 function writeToFile(arrData) {
