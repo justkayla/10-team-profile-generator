@@ -14,7 +14,7 @@ const generateHTML = (employees) => {
     for (let i = 0; i < arrData.length; i++) {
         let special = ""
         if(employees[i].getRole() === "Manager") {
-            special = "Office Number: "+employees[i].getOfficeNum()
+            special = "Office number: "+employees[i].getOfficeNum()
         } else if (employees[i].getRole() === "Engineer"){
             special = "GitHub: "+employees[i].getGithub()       
         } else {
