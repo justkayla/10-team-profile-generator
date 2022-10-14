@@ -2,12 +2,12 @@ const Intern = require('../lib/intern');
 
 // Positive test
 describe("Intern", () => {
-    describe("school", () => {
+    describe("getSchool", () => {
         it("should return the school input", () => {
             // Arrange: set up the needs of the test
             const emp = new Intern("name", "id", "email", "school");
             // Act: actually run code being tested
-            const result = emp.school
+            const result = emp.getSchool()
             // Assert: expectation for what should happen
             expect(result).toEqual("school")
         })

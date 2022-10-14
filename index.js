@@ -56,8 +56,7 @@ const generateHTML = (employees) => {
       </div>
       <div class="d-flex justify-content-center p-3 m-3">
       ${employeeHTML}
-      </div>
-      
+      </div>      
 
 <div class="container-fluid" id="footer">
         <div class="row align-items-end">
