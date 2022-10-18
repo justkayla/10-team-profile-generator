@@ -16,7 +16,7 @@ const generateHTML = (employees) => {
         if(employees[i].getRole() === "Manager") {
             special = "Office number: "+employees[i].getOfficeNum()
         } else if (employees[i].getRole() === "Engineer"){
-            special = "GitHub: "+"github.com/"+employees[i].getGithub()       
+            special = "GitHub: "+`<a href ="https://www.github.com/${employees[i].getGithub()}">${employees[i].getGithub()}</a>`       
         } else {
             special = "School: "+employees[i].getSchool()
         }
@@ -29,7 +29,7 @@ const generateHTML = (employees) => {
                     <ul class="list-group">
                         <li class="list-group-item">Name: ${employees[i].getName()}</li>
                         <li class="list-group-item">Employee ID: ${employees[i].getId()}</li>
-                        <li class="list-group-item">Email: <a href = "mailto: ${employees[i].getEmail()}"></a></li>                    
+                        <li class="list-group-item">Email: <a href = "mailto:${employees[i].getEmail()}">${employees[i].getEmail()}</a></li>                    
                         <li class="list-group-item">${special}</li>                    
                     </ul>
                 </div>            
