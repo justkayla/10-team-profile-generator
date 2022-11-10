@@ -57,4 +57,4 @@ Below is an in-process copy of my README.md generator.
 
 ## Contributor
 
-Kayla Justice &copy;2022   
+Kayla Justice 2022   
